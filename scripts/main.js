@@ -6,6 +6,9 @@ var currentURI = null;
 var currentArtistName = null;
 var currentTrackName = null;
 
+var ajaxImageFetcher = null;
+var ajaxInfoFetcher = null;
+
 var e_canvas = $('.canvas');
 var e_background = e_canvas.find('.background');
 var e_portrait = e_canvas.find('.portrait');
@@ -148,16 +151,20 @@ function updateArtist(player)
 						}
 					});
 
-					$.ajax({
+					if (ajaxImageFetcher) {
+						ajaxImageFetcher.abort();
+					}
+
+					BackgroundImages.clear();
+					PortraitImages.clear();
+
+					ajaxImageFetcher = $.ajax({
 						'type': "GET",
 						'url': LAST_FM_API_URL + '&method=artist.getimages&artist=' + encodeURIComponent(artistName),
 						'dataType': "xml",
 						'success': function(xml) {
 							var images = [];
 							var xml = $(xml);
-
-							BackgroundImages.clear();
-							PortraitImages.clear();
 
 							xml.find('image>sizes').each(function(i) {
 
@@ -176,6 +183,10 @@ function updateArtist(player)
 									BackgroundImages.add(url);
 								}
 							});
+
+						},
+						'error': function(a, b, c) {
+							console.log(a,b,c);
 						},
 						'complete': function() {
 							if (0 === BackgroundImages.length()) {
@@ -200,7 +211,11 @@ function updateArtist(player)
 
 function fetchArtistInfo(artistname, callback)
 {
-	$.ajax({
+	if (ajaxInfoFetcher) {
+		ajaxInfoFetcher.abort();
+	}
+
+	ajaxInfoFetcher = $.ajax({
 		'type': "GET",
 		'url': LAST_FM_API_URL + '&method=artist.getinfo&artist=' + encodeURIComponent(artistname),
 		'dataType': "xml",
