@@ -33,7 +33,7 @@ a {
 }
 
 .canvas .background.zoom {
-	-webkit-animation: zoom 50s linear infinite alternate;
+	-webkit-animation: zoom 50s ease-in-out infinite alternate;
 }
 
 .canvas .portrait {
@@ -104,14 +104,6 @@ a {
 		shimmer 50s infinite alternate ease;*/
 }
 
-.out {
-	-webkit-animation: throwout .5s 0 1 normal forwards;
-}
-
-.in {
-	-webkit-animation: throwin 1s 0 1 normal forwards;
-}
-
 .canvas .biography {
 	background-color: rgba(0,0,0,.7);
 	box-shadow: 0 0 6px rgba(255,255,255,.3);
@@ -139,27 +131,5 @@ a {
 	}
 	100% {
 		-webkit-transform: scale(1.2);
-	}
-}
-
-@-webkit-keyframes throwout {
-	0% {
-		left: 0;
-		opacity: 1;
-	}
-	100% {
-		left: 300px;
-		opacity: 0;
-	}
-}
-
-@-webkit-keyframes throwin {
-	0% {
-		left: -100;
-		opacity: 0;
-	}
-	100% {
-		left: 0px;
-		opacity: 1;
 	}
 }

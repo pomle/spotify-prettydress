@@ -2,6 +2,7 @@ var LAST_FM_API_URL = 'http://ws.audioscrobbler.com/2.0/?api_key=de86032ef8ba603
 var IMAGE_MIN_WIDTH = 600;
 var IMAGE_MIN_HEIGHT = 400;
 
+var currentURI = null;
 var currentArtistName = null;
 var currentTrackName = null;
 
@@ -86,6 +87,13 @@ function updateArtist(player)
 		var track = player.track;
 
 		console.log('Track', track);
+
+		if (currentURI === track.uri) {
+			console.log('Track not changed', track.uri);
+			return false;
+		}
+
+		currentURI = track.uri;
 
 		track.load('artists').done(function(track) {
 
