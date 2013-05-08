@@ -190,7 +190,9 @@ function updateArtist(player)
 						},
 						'complete': function() {
 							if (0 === BackgroundImages.length()) {
-								BackgroundImages.add('../resource/please_stand_by.jpg');
+								BackgroundImages.add('../resource/5.jpg');
+								BackgroundImages.add('../resource/3.jpg');
+								BackgroundImages.add('../resource/9.jpg');
 							}
 
 							BackgroundImages.shuffle();
