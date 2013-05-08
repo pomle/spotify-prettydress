@@ -1,4 +1,4 @@
-function ImagePoolController(interval, applier, jumper)
+function ImagePoolController(interval, applier)
 {
 	var self = this;
 	var timer = null;
@@ -94,7 +94,7 @@ function ImagePoolController(interval, applier, jumper)
 	{
 		clearTimeout(timer);
 		self.load(applier);
-		jumper(self);
+		self.skip(1);
 		timer = setTimeout(self.update, interval);
 	}
 }

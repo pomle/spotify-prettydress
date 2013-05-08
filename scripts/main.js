@@ -1,6 +1,7 @@
 var LAST_FM_API_KEY = '84b51ae6c5d600eb5cb10bf6fc98461b';
 var LAST_FM_API_URL = 'http://ws.audioscrobbler.com/2.0/?api_key=' + LAST_FM_API_KEY;
 
+/* Rejects images smaller than this for background. */
 var IMAGE_MIN_WIDTH = 600;
 var IMAGE_MIN_HEIGHT = 400;
 
@@ -11,6 +12,7 @@ var currentTrackName = null;
 var ajaxImageFetcher = null;
 var ajaxInfoFetcher = null;
 
+/* Pre-point to common elements. */
 var e_canvas = $('.canvas');
 var e_background = e_canvas.find('.background');
 var e_portrait = e_canvas.find('.portrait');
@@ -18,6 +20,7 @@ var e_artistName = e_canvas.find('.artistName');
 var e_trackName = e_canvas.find('.trackName');
 var e_bio = e_canvas.find('.biography');
 
+/* Image pool for background images. */
 var BackgroundImages = new ImagePoolController(23333,
 	function(image) {
 
@@ -43,11 +46,9 @@ var BackgroundImages = new ImagePoolController(23333,
 			e_background.addClass('zoom');
 			e_background.transition({'opacity': 1}, timing);
 		});
-	},
-	function(IP) {
-		IP.skip(1);
 	});
 
+/* Image pool for portrait images. */
 var PortraitImages = new ImagePoolController(9525,
 	function(image) {
 
@@ -65,26 +66,7 @@ var PortraitImages = new ImagePoolController(9525,
 			e_portrait.css('background-image', 'url(' + image.src + ')');
 			e_portrait.transition({'rotateY': '0deg'}, timing, 'easeOutQuart');
 		});
-	},
-	function(IP) {
-		IP.skip(1);
 	});
-
-$(window).on('resize', function() {
-	e_canvas.height($(this).height() + 100);
-}).trigger('resize');
-
-
-require(['$api/models'], function(models) {
-
-	var player = models.player;
-
-	player.addEventListener('change', function(event) {
-		updateArtist(event.target);
-	});
-
-	player.load('track').done(updateArtist);
-});
 
 function updateArtist(player)
 {
@@ -214,7 +196,6 @@ function updateArtistImages(artistname)
 	});
 }
 
-
 function updateArtistInfo(artistname)
 {
 	if (ajaxInfoFetcher) {
@@ -241,3 +222,18 @@ function updateArtistInfo(artistname)
 }
 
 
+/* Canvas follows body height. */
+$(window).on('resize', function() {
+	e_canvas.height($(this).height() + 100);
+}).trigger('resize');
+
+require(['$api/models'], function(models) {
+
+	var player = models.player;
+
+	player.addEventListener('change', function(event) {
+		updateArtist(event.target);
+	});
+
+	player.load('track').done(updateArtist);
+});
