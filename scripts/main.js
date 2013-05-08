@@ -1,4 +1,6 @@
-var LAST_FM_API_URL = 'http://ws.audioscrobbler.com/2.0/?api_key=de86032ef8ba603c63bf4527b29e3230';
+var LAST_FM_API_KEY = '84b51ae6c5d600eb5cb10bf6fc98461b';
+var LAST_FM_API_URL = 'http://ws.audioscrobbler.com/2.0/?api_key=' + LAST_FM_API_KEY;
+
 var IMAGE_MIN_WIDTH = 600;
 var IMAGE_MIN_HEIGHT = 400;
 
