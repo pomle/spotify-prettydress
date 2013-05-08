@@ -230,8 +230,10 @@ function updateArtistInfo(artistname)
 			var xml = $(xml);
 			var bio = xml.find('lfm>artist>bio>summary').text();
 
-			e_bio.find('.content').html(bio);
-			e_bio.addClass('exists');
+			if (bio) {
+				e_bio.find('.content').html(bio);
+				e_bio.addClass('exists');
+			}
 		}
 	});
 }
