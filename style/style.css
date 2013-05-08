@@ -1,0 +1,165 @@
+html {
+	font-family: "Proxima Nova", "Helvetiva Neue", "Arial", sans-serif;
+}
+
+body {
+	background-color: #000;
+	margin: 0;
+}
+
+a {
+	color: rgba(132,189,0,1); /*#A1C900;*/
+	text-decoration: none;
+}
+
+.canvas {
+	height: 2000px;
+	position: relative;
+}
+
+.canvas .background {
+	background-color: transparent;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 100%;
+	margin: 0px;
+	opacity: 0;
+	width: 100%;
+}
+
+.canvas .background.portraitMode {
+	background-position: top center;
+}
+
+.canvas .background.zoom {
+	-webkit-animation: zoom 50s linear infinite alternate;
+}
+
+.canvas .portrait {
+	background-color: #000;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: contain;
+	box-shadow: 0 0 15px rgba(0,0,0,1);
+	left: 5%;
+	height: 300px;
+	position: absolute;
+	top: 17%;
+	width: 300px;
+	-webkit-transition: opacity .2s ease;
+}
+
+.canvas .portrait:hover {
+	opacity: .1;
+}
+
+
+.canvas .trackDetails {
+	left: 5%;
+	position: absolute;
+	top: 4.5%;
+	width: 100%;
+}
+
+.canvas .artistNameContainer {
+	position: absolute;
+	width: 100%;
+}
+
+.canvas .artistName {
+	color: #fff;
+	font-size: 36pt;
+	font-weight: bold;
+	letter-spacing: -1pt;
+	opacity: .6;
+	text-shadow: 0 0 .15em rgba(0,0,0,.8);
+	z-index: 1;
+	/*-webkit-animation:
+		flap 60s infinite alternate linear,
+		shimmer 50s infinite alternate ease;*/
+}
+
+.canvas .trackNameContainer {
+	opacity: 0;
+	position: absolute;
+	width: 100%;
+}
+
+.canvas .trackName {
+	color: #fff;
+	font-size: 24pt;
+	font-weight: normal;
+	left: 1em;
+	letter-spacing: 1pt;
+	line-height: .9;
+	opacity: .9;
+	position: absolute;
+	text-shadow: 0 0 .20em rgba(0,0,0,.8);
+	top: 34pt;
+	width: 90%;
+	z-index: 2;
+	/*-webkit-animation:
+		flap 60s infinite alternate linear,
+		shimmer 50s infinite alternate ease;*/
+}
+
+.out {
+	-webkit-animation: throwout .5s 0 1 normal forwards;
+}
+
+.in {
+	-webkit-animation: throwin 1s 0 1 normal forwards;
+}
+
+.canvas .biography {
+	background-color: rgba(0,0,0,.7);
+	box-shadow: 0 0 6px rgba(255,255,255,.3);
+	color: #fff;
+	font-size: 10pt;
+	min-height: 9em;
+	opacity: 0;
+	position: absolute;
+	bottom: 10em;
+	width: 100%;
+	-webkit-transition: opacity 4s ease;
+}
+
+.canvas .biography.exists {
+	opacity: 1;
+}
+
+.canvas .biography .content {
+	margin: 2em 4em;
+}
+
+@-webkit-keyframes zoom {
+	0% {
+		-webkit-transform: scale(1);
+	}
+	100% {
+		-webkit-transform: scale(1.2);
+	}
+}
+
+@-webkit-keyframes throwout {
+	0% {
+		left: 0;
+		opacity: 1;
+	}
+	100% {
+		left: 300px;
+		opacity: 0;
+	}
+}
+
+@-webkit-keyframes throwin {
+	0% {
+		left: -100;
+		opacity: 0;
+	}
+	100% {
+		left: 0px;
+		opacity: 1;
+	}
+}

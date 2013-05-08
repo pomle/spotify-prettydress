@@ -1,0 +1,18 @@
+{
+  "BundleType": "Application",
+  "RequiredPermissions": [
+    "http://*.cloudfront.net",
+    "http://ws.audioscrobbler.com/",
+    "http://code.jquery.com/"
+  ],
+  "ApiPermissions" : {
+    "core" : ["private"]
+  },
+  "BundleIdentifier" : "prettydress",
+  "BundleVersion": "0.0.2",
+  "Dependencies": {
+    "api": "1.19.0",
+    "views": "1.22.0",
+    "shared": "0.1.0"
+  }
+}
