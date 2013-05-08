@@ -2,6 +2,12 @@
   "BundleType": "Application",
   "BundleIdentifier" : "prettydress",
   "BundleVersion": "0.0.3",
+  "AppName": {
+    "en": "Now Playing"
+  },
+  "AppIcon": {
+    "36x18": "prettydress.png"
+  },
   "RequiredPermissions": [
     "http://*.cloudfront.net",
     "http://ws.audioscrobbler.com/",
