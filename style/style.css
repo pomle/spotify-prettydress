@@ -54,6 +54,10 @@ a {
 	opacity: .1;
 }
 
+.canvas .portrait.hidden {
+	opacity: 0;
+}
+
 
 .canvas .trackDetails {
 	left: 5%;
