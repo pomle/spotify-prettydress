@@ -229,8 +229,13 @@ function updateArtistInfo(artistname)
 
 /* Canvas follows body height. */
 $(window).on('resize', function() {
-	e_canvas.height($(this).height() + 100);
+	e_canvas.height($(this).height());
 }).trigger('resize');
+
+/* Bind to elements that can be minimized. */
+e_bio.add(e_portrait).on('click', function() {
+	$(this).toggleClass('minimize');
+});
 
 if (typeof require == 'function') {
 	require(['$api/models'], function(models) {
