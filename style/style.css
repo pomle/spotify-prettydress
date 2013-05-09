@@ -45,7 +45,7 @@ a {
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: contain;
-	border: solid 1px rgba(255,255,255, 0);
+	border: solid 0 rgba(255,255,255, .2);
 	box-shadow: 0 0 13px rgba(0,0,0,.7);
 	left: 5%;
 	height: 300px;
@@ -56,7 +56,7 @@ a {
 }
 
 .canvas .portrait.minimize {
-	border-color: rgba(255,255,255, .2);
+	border-width: 1px;
 	left: 15px;
 	height: 40px;
 	top: 15px;
