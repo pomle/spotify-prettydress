@@ -76,7 +76,7 @@ var PortraitImages = new ImagePoolController(9525,
 		});
 	});
 
-function updateArtist(player)
+function updateFromPlayer(player)
 {
 	player.load('track').done(function(player) {
 
@@ -92,56 +92,9 @@ function updateArtist(player)
 		currentURI = track.uri;
 
 		track.load('artists').done(function(track) {
-
 			var artists = track.artists;
-
-			if (track.name !== currentTrackName) {
-				currentTrackName = track.name;
-
-				$('.trackNameContainer').transition({
-					'left': '700px',
-					'opacity': 0
-				},
-				600, 'easeOutExpo', function() {
-					$(this).css({'left': '-200px'});
-					e_trackName.text(currentTrackName);
-					$(this).transition({
-						'left': '0px',
-						'opacity': 1
-					}, 1000, 'easeOutExpo');
-				});
-			}
-
-			console.log('Artists', artists);
-
 			if (artists.length && artists.length > 0) {
-				var artistName = artists[0].name;
-
-				console.log(artistName);
-
-				if (artistName !== currentArtistName) {
-
-					e_portrait.addClass('hidden');
-
-					currentArtistName = artistName;
-
-					e_background.transition({'opacity': 0});
-
-					$('.artistNameContainer').transition({
-						'top': '-30px',
-						'opacity': 0
-					},
-					600, 'easeOutExpo', function() {
-						e_artistName.text(artistName);
-						$(this).transition({
-							'top': '0px',
-							'opacity': 1
-						}, 1000, 'easeOutExpo');
-					});
-
-					updateArtistImages(artistName);
-					updateArtistInfo(artistName);
-				}
+				updateState(artists[0].name, track.name);
 			}
 		});
 	});
@@ -188,9 +141,9 @@ function updateArtistImages(artistname)
 		},
 		'complete': function() {
 			if (0 === BackgroundImages.length()) {
-				BackgroundImages.add('../resource/5.jpg');
-				BackgroundImages.add('../resource/3.jpg');
-				BackgroundImages.add('../resource/9.jpg');
+				BackgroundImages.add('resource/5.jpg');
+				BackgroundImages.add('resource/3.jpg');
+				BackgroundImages.add('resource/9.jpg');
 			}
 
 			BackgroundImages.shuffle();
@@ -202,6 +155,50 @@ function updateArtistImages(artistname)
 			PortraitImages.update();
 		}
 	});
+}
+
+function updateState(artistName, trackName)
+{
+	if (trackName !== currentTrackName) {
+		currentTrackName = trackName;
+
+		$('.trackNameContainer').transition({
+			'left': '700px',
+			'opacity': 0
+		},
+		600, 'easeOutExpo', function() {
+			$(this).css({'left': '-200px'});
+			e_trackName.text(currentTrackName);
+			$(this).transition({
+				'left': '0px',
+				'opacity': 1
+			}, 1000, 'easeOutExpo');
+		});
+	}
+
+	if (artistName !== currentArtistName) {
+
+		e_portrait.addClass('hidden');
+
+		currentArtistName = artistName;
+
+		e_background.transition({'opacity': 0});
+
+		$('.artistNameContainer').transition({
+			'top': '-30px',
+			'opacity': 0
+		},
+		600, 'easeOutExpo', function() {
+			e_artistName.text(artistName);
+			$(this).transition({
+				'top': '0px',
+				'opacity': 1
+			}, 1000, 'easeOutExpo');
+		});
+
+		updateArtistImages(artistName);
+		updateArtistInfo(artistName);
+	}
 }
 
 function updateArtistInfo(artistname)
@@ -235,13 +232,18 @@ $(window).on('resize', function() {
 	e_canvas.height($(this).height() + 100);
 }).trigger('resize');
 
-require(['$api/models'], function(models) {
+if (typeof require == 'function') {
+	require(['$api/models'], function(models) {
 
-	var player = models.player;
+		var player = models.player;
 
-	player.addEventListener('change', function(event) {
-		updateArtist(event.target);
+		player.addEventListener('change', function(event) {
+			updateFromPlayer(event.target);
+		});
+
+		player.load('track').done(updateFromPlayer);
 	});
-
-	player.load('track').done(updateArtist);
-});
+}
+else {
+	updateState('Debug', 'Test');
+}
