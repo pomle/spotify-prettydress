@@ -54,6 +54,12 @@ var PortraitImages = new ImagePoolController(9525,
 
 		var timing = 500;
 
+		var ratio = (image.width / image.height);
+
+		/* Calculate how "far" we are from a perfectly square image. */
+		var discrepancy = Math.abs(1 - ratio);
+
+		console.log('Portrait ratio discrepancy', discrepancy);
 		console.log('Portrait image to update', image, image.width, image.height);
 
 		//e_portrait.css('background-image', 'url(' + image.src + ')');
@@ -61,6 +67,8 @@ var PortraitImages = new ImagePoolController(9525,
 		e_portrait.transition({
 			'rotateY': '90deg'
 		}, timing, 'easeInQuart', function() {
+			/* Close-to-square images should fill the whole portrait to avoid bitter edges. */
+			e_portrait.css('background-size', discrepancy < .2 ? 'cover' : 'contain');
 			e_portrait.removeClass('hidden');
 			e_portrait.css('-webkit-transform', 'rotateY(-90deg)');
 			e_portrait.css('background-image', 'url(' + image.src + ')');
