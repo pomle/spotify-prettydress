@@ -3,7 +3,7 @@ html {
 }
 
 body {
-	background-color: #000;
+	height: 100%;
 	margin: 0;
 }
 
@@ -13,8 +13,12 @@ a {
 }
 
 .canvas {
-	height: 2000px;
-	position: relative;
+	background-color: #000;
+	bottom: 0;
+	left: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
 }
 
 .canvas .background {
