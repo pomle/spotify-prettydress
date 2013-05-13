@@ -227,7 +227,15 @@ function updateArtistInfo(artistname)
 }
 
 /* Bind to elements that can be minimized. */
-e_bio.add(e_portrait).on('click', function() {
+e_canvas.on('click', '.portrait,.biography', function(e) {
+
+	/* If an anchor tag received the click, do not interrupt. */
+	if (0 !== $(e.target).closest('a').length) {
+		return true;
+	}
+
+	/* Otherwise, intercept. */
+	e.preventDefault();
 	$(this).toggleClass('minimize');
 });
 
