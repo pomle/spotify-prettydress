@@ -253,5 +253,16 @@ if (typeof require == 'function') {
 	});
 }
 else {
-	updateState('Debug', 'Test');
+	updateState('Nero', 'Test');
 }
+
+
+var CoverFlow = new CoverFlowController($('.queueFlow .content'));
+
+var cfi = 9;
+while (cfi--) {
+	CoverFlow.append($('<div class="item"><div class="cover"></div></div>'));
+}
+
+CoverFlow.updateCSS();
+

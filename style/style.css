@@ -151,6 +151,36 @@ a {
 	-webkit-transition: opacity .5 ease;
 }
 
+.canvas .queueFlow {
+	background: rgba(0,0,0,.5);
+	width: 100%;
+	top: 50%;
+	position: absolute;
+}
+
+.canvas .queueFlow > .content {
+	height: 150px;
+	margin: 20px 100px;
+	position: relative;
+	-webkit-perspective: 800px;
+}
+
+.canvas .queueFlow > .content .item {
+	position: absolute;
+	width: 0;
+	-webkit-transition: all .5s ease;
+}
+
+.canvas .queueFlow > .content .item .cover {
+	background: #000 url('http://www.kreativsounds.com/uploads/2012/01/Adele-21-Album-Cover.png') center no-repeat;
+	box-shadow: 0 0 8px rgba(0,0,0,.8);
+	height: 150px;
+	left: -75px;
+	position: absolute;
+	width: 150px;
+}
+
+
 @-webkit-keyframes zoom {
 	0% {
 		-webkit-transform: scale(1);
