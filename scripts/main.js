@@ -258,6 +258,10 @@ else {
 
 var queueFlow = $('.queueFlow');
 
+queueFlow.on('click', '.item', function(e) {
+	console.log(e.target);
+});
+
 
 var CoverFlow = new CoverFlowController(queueFlow.find('.content'));
 

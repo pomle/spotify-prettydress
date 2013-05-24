@@ -71,15 +71,21 @@ function CoverFlowController(parent)
 				myPosition = (.5 + (positionFraction * myOffset)) * 100 + '%';
 			}
 
-			console.log('Offset / Size / Position / Rotation / AbsOffset',
-				myOffset, mySize, myPosition, myYRotation, myAbsOffset);
+			console.log('Opacity', myOpacity);
 
-			item.css('left', myPosition);
 			item.css('opacity', myOpacity);
-			item.css('-webkit-transform',
-				'translate3d(0, 0, ' + mySize + ') rotateY(' + myYRotation + ')');
 
-			item.find('.overlay').css('opacity', myShadow);
+			if (myOpacity > 0) {
+
+				console.log('Offset / Size / Position / Rotation / AbsOffset',
+					myOffset, mySize, myPosition, myYRotation, myAbsOffset);
+
+				item.css('left', myPosition);
+				item.css('-webkit-transform',
+					'translate3d(0, 0, ' + mySize + ') rotateY(' + myYRotation + ')');
+
+				item.find('.overlay').css('opacity', myShadow);
+			}
 		}
 	}
 }
