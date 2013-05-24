@@ -63,16 +63,17 @@ var PortraitImages = new ImagePoolController(9525,
 		console.log('Portrait image to update', image, image.width, image.height);
 
 		//e_portrait.css('background-image', 'url(' + image.src + ')');
+		var e_content = e_portrait.find('.content');
 
-		e_portrait.transition({
+		e_content.transition({
 			'rotateY': '90deg'
 		}, timing, 'easeInQuart', function() {
 			/* Close-to-square images should fill the whole portrait to avoid bitter edges. */
-			e_portrait.css('background-size', discrepancy < .2 ? 'cover' : 'contain');
+			e_content.css('background-size', discrepancy < .2 ? 'cover' : 'contain');
 			e_portrait.removeClass('hidden');
-			e_portrait.css('-webkit-transform', 'rotateY(-90deg)');
-			e_portrait.css('background-image', 'url(' + image.src + ')');
-			e_portrait.transition({'rotateY': '0deg'}, timing, 'easeOutQuart');
+			e_content.css('-webkit-transform', 'rotateY(-90deg)');
+			e_content.css('background-image', 'url(' + image.src + ')');
+			e_content.transition({'rotateY': '0deg'}, timing, 'easeOutQuart');
 		});
 	});
 
@@ -213,7 +214,7 @@ function updateArtistInfo(artistname)
 		'type': "GET",
 		'url': LAST_FM_API_URL + '&method=artist.getinfo&artist=' + encodeURIComponent(artistname),
 		'dataType': "xml",
-		success: function(xml) {
+		'success': function(xml) {
 			var info = {};
 			var xml = $(xml);
 			var bio = xml.find('lfm>artist>bio>summary').text();

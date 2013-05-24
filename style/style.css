@@ -40,19 +40,26 @@ a {
 	-webkit-animation: zoom 50s ease-in-out infinite alternate;
 }
 
+
 .canvas .portrait {
+	left: 5%;
+	height: 300px;
+	position: absolute;
+	top: 17%;
+	width: 300px;
+	-webkit-perspective: 800px;
+	-webkit-transition: all .5s ease;
+}
+
+.canvas .portrait > .content {
 	background-color: #000;
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: contain;
 	border: solid 0 rgba(255,255,255, .2);
 	box-shadow: 0 0 13px rgba(0,0,0,.7);
-	left: 5%;
-	height: 300px;
-	position: absolute;
-	top: 17%;
-	width: 300px;
-	-webkit-transition: all .5s ease;
+	height: inherit;
+	width: inherit;
 }
 
 .canvas .portrait.minimize {
