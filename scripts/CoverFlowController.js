@@ -4,7 +4,7 @@ function CoverFlowController(parent)
 
 	this.lightFalloff = .6;
 	this.rotationFalloff = 90;
-	this.sizeFalloff = 65;
+	this.sizeFalloff = 400;
 
 	this.itemCurrent = 0;
 	this.itemsVisible = 5;
@@ -33,9 +33,11 @@ function CoverFlowController(parent)
 		var itemsTotal = items.length;
 		var itemsVisible = (this.itemsVisible * 2) + 1;
 		var itemsVisibleTotal = Math.min(itemsVisible, itemsTotal);
-		console.log(itemsTotal, itemsVisible, itemsVisibleTotal);
+		var itemsVisibleUsable = (this.itemsVisible || 1);
+		console.log(itemsTotal, itemsVisible, itemsVisibleTotal, itemsVisibleUsable);
 
-		var positionFraction = 1 / (itemsVisibleTotal);
+		var positionFraction = .5 / this.itemsVisible;
+		console.log('Fraction', positionFraction);
 
 		var totalWidth = parent.width();
 		var incrementalWidth = totalWidth / (itemsVisibleTotal + 1);
@@ -47,16 +49,13 @@ function CoverFlowController(parent)
 
 			var item = items[i];
 
-			var itemsVisibleUsable = (this.itemsVisible || 1);
-
-
 			var myPosition = null;
 			var myOffset = i - this.itemCurrent;
 			var myAbsOffset = Math.abs(myOffset);
 			var myProgress = myAbsOffset / itemsVisibleUsable;
 
 			var myOpacity = 1;
-			var mySize = -myAbsOffset * this.sizeFalloff + 'px';
+			var mySize = -(this.sizeFalloff * myProgress) + 'px';
 			var myYRotation = -myOffset * (this.rotationFalloff / itemsVisibleUsable) + 'deg';
 			var myShadow = (this.lightFalloff * myProgress);
 
