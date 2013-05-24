@@ -256,13 +256,20 @@ else {
 	updateState('Nero', 'Test');
 }
 
+var queueFlow = $('.queueFlow');
 
-var CoverFlow = new CoverFlowController($('.queueFlow .content'));
 
-var cfi = 9;
+var CoverFlow = new CoverFlowController(queueFlow.find('.content'));
+
+var cfi = 10;
 while (cfi--) {
-	CoverFlow.append($('<div class="item"><div class="cover"></div></div>'));
+	CoverFlow.append($('<div class="item"><div class="cover"><div class="overlay"></div></div></div>'));
 }
 
+CoverFlow.itemCurrent = -9;
 CoverFlow.updateCSS();
 
+queueFlow.addClass('ready');
+
+CoverFlow.itemCurrent = 0;
+CoverFlow.updateCSS();
