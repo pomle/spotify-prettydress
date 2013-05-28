@@ -77,6 +77,18 @@ var PortraitImages = new ImagePoolController(9525,
 		});
 	});
 
+var queueFlow = $('.queueFlow');
+
+var CoverFlow = new CoverFlowController(queueFlow.find('.content'));
+
+var cfi = 10;
+while (cfi--) {
+
+}
+
+queueFlow.addClass('ready');
+
+
 function updateFromPlayer(player)
 {
 	player.load('track').done(function(player) {
@@ -118,6 +130,8 @@ function updateArtistImages(artistname)
 			var images = [];
 			var xml = $(xml);
 
+			CoverFlow.clear();
+
 			xml.find('image>sizes').each(function(i) {
 
 				var extralarge = $(this).find('size[name=extralarge]');
@@ -126,8 +140,11 @@ function updateArtistImages(artistname)
 				var height = parseInt(original.attr('height'), 10);
 
 				if (extralarge) {
-					PortraitImages.add(extralarge.text());
+					var url = extralarge.text();
+					PortraitImages.add(url);
+					CoverFlow.append($('<div class="item"><div class="cover" style="background-image: url(' + url + ');"><div class="overlay"></div></div></div>'));
 				}
+
 
 				if (width >= IMAGE_MIN_WIDTH && height >= IMAGE_MIN_HEIGHT) {
 					var url = original.text();
@@ -135,6 +152,8 @@ function updateArtistImages(artistname)
 					BackgroundImages.add(url);
 				}
 			});
+
+			CoverFlow.updateCSS();
 
 		},
 		'error': function(a, b, c) {
