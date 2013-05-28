@@ -259,6 +259,36 @@ e_canvas.on('click', '.portrait,.biography', function(e) {
 	$(this).toggleClass('minimize');
 });
 
+$(window).on('keydown', function(e) {
+
+	e.preventDefault();
+
+	switch (e.which) {
+		case 37:
+			CoverFlow.itemCurrent++;
+			CoverFlow.updateCSS();
+		break;
+
+		case 38:
+			CoverFlow.itemsVisible++;
+			CoverFlow.updateCSS();
+		break;
+
+		case 39:
+			CoverFlow.itemCurrent--;
+			CoverFlow.updateCSS();
+		break;
+
+		case 40:
+			CoverFlow.itemsVisible--;
+			CoverFlow.updateCSS();
+		break;
+
+	}
+
+	console.log(e.which);
+});
+
 if (typeof require == 'function') {
 	require(['$api/models'], function(models) {
 
