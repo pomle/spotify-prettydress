@@ -41,10 +41,10 @@ function CoverFlowController(parent)
 		var itemsTotal = this.items.length;
 		var itemsVisible = (this.itemsVisible * 2) + 1;
 		var itemsVisibleTotal = Math.min(itemsVisible, itemsTotal);
-		var itemsVisibleUsable = (this.itemsVisible || 1);
+		var itemsVisibleUsable = Math.max(this.itemsVisible, 1);
 		console.log(itemsTotal, itemsVisible, itemsVisibleTotal, itemsVisibleUsable);
 
-		var positionFraction = .5 / this.itemsVisible;
+		var positionFraction = .5 / itemsVisibleUsable;
 		console.log('Fraction', positionFraction);
 
 		var totalWidth = parent.width();
@@ -68,32 +68,26 @@ function CoverFlowController(parent)
 			var myShadow = (this.lightFalloff * myProgress);
 
 			if (i < this.itemCurrent - this.itemsVisible) {
-				myPosition = positionStart;
 				myOpacity = 0;
 			}
 			else if (i > this.itemCurrent + this.itemsVisible) {
-				myPosition = positionEnd;
 				myOpacity = 0;
 			}
-			else {
-				myPosition = (.5 + (positionFraction * myOffset)) * 100 + '%';
-			}
+
+			myPosition = (.5 + (positionFraction * myOffset)) * 100 + '%';
 
 			console.log('Opacity', myOpacity);
 
 			item.css('opacity', myOpacity);
 
-			if (myOpacity > 0) {
+			console.log('Offset / Size / Position / Rotation / AbsOffset',
+				myOffset, mySize, myPosition, myYRotation, myAbsOffset);
 
-				console.log('Offset / Size / Position / Rotation / AbsOffset',
-					myOffset, mySize, myPosition, myYRotation, myAbsOffset);
+			item.css('left', myPosition);
+			item.css('-webkit-transform',
+				'translate3d(0, 0, ' + mySize + ') rotateY(' + myYRotation + ')');
 
-				item.css('left', myPosition);
-				item.css('-webkit-transform',
-					'translate3d(0, 0, ' + mySize + ') rotateY(' + myYRotation + ')');
-
-				item.find('.overlay').css('opacity', myShadow);
-			}
+			item.find('.overlay').css('opacity', myShadow);
 		}
 	}
 }
