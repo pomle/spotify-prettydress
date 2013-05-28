@@ -1,6 +1,6 @@
 function CoverFlowController(parent)
 {
-	var items = [];
+	this.items = [];
 
 	this.lightFalloff = .6;
 	this.rotationFalloff = 90;
@@ -16,21 +16,21 @@ function CoverFlowController(parent)
 	this.append = function(element)
 	{
 		element.css('left', positionEnd);
-		items.push(element);
+		this.items.push(element);
 		parent.append(element);
 	}
 
 	this.prepend = function(element)
 	{
 		element.css('left', positionStart);
-		items.unshift(element);
+		this.items.unshift(element);
 		parent.prepend(element);
 	}
 
 	this.updateCSS = function updateCSS()
 	{
 		/* Do the math. */
-		var itemsTotal = items.length;
+		var itemsTotal = this.items.length;
 		var itemsVisible = (this.itemsVisible * 2) + 1;
 		var itemsVisibleTotal = Math.min(itemsVisible, itemsTotal);
 		var itemsVisibleUsable = (this.itemsVisible || 1);
@@ -45,9 +45,9 @@ function CoverFlowController(parent)
 
 		console.log('visibleItemIndex', visibleItemIndex);
 
-		for (i in items) {
+		for (i in this.items) {
 
-			var item = items[i];
+			var item = this.items[i];
 
 			var myPosition = null;
 			var myOffset = i - this.itemCurrent;
