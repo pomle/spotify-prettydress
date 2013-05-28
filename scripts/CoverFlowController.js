@@ -20,6 +20,14 @@ function CoverFlowController(parent)
 		parent.append(element);
 	}
 
+	this.clear = function()
+	{
+		for (x in this.items) {
+			this.items[x].remove();
+		}
+		this.items = [];
+	}
+
 	this.prepend = function(element)
 	{
 		element.css('left', positionStart);
