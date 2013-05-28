@@ -173,7 +173,9 @@ a {
 }
 
 .canvas .queueFlow > .content .item .cover {
-	background: #000 url('http://www.kreativsounds.com/uploads/2012/01/Adele-21-Album-Cover.png') center no-repeat;
+	background-color: #000;
+	background-repeat: no-repeat;
+	background-position: center;
 	background-size: cover;
 	box-shadow: 0 0 16px rgba(0,0,0,1);
 	position: absolute;
