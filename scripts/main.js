@@ -305,24 +305,78 @@ else {
 	updateState('Nero', 'Test');
 }
 
-var queueFlow = $('.queueFlow');
+function coverFlowDemo()
+{
+	var accDelay = 0;
+	var defDelay = 2000;
+	var timer;
 
-queueFlow.on('click', '.item', function(e) {
-	console.log(e.target);
-});
+	var reset = function() {
+		accDelay = 0;
+		CoverFlow.itemCurrent = 0;
+		CoverFlow.itemsVisible = 5;
+		CoverFlow.updateCSS();
+	}
+
+	var execute = function(cb, delay) {
+		clearTimeout(timer);
+		accDelay += delay || defDelay;
+		timer = setTimeout(cb, accDelay);
+	}
+
+	var run = function() {
+		execute(function() { goto(Math.floor(CoverFlow.items.length / 2)); });
+		execute(function() { skip(-1); }, 500);
+		execute(function() { skip(-1); }, 500);
+		execute(function() { skip(-1); }, 500);
+
+		execute(function() { visible(0); });
+		execute(function() { skip(1); }, 500);
+		execute(function() { skip(1); }, 500);
+		execute(function() { skip(1); }, 500);
 
 
-var CoverFlow = new CoverFlowController(queueFlow.find('.content'));
+		execute(function() { visible(1); });
+		execute(function() { skip(1); }, 500);
+		execute(function() { skip(1); }, 500);
 
-var cfi = 10;
-while (cfi--) {
-	CoverFlow.append($('<div class="item"><div class="cover"><div class="overlay"></div></div></div>'));
+		execute(function() { visible(2); });
+		execute(function() { skip(-1); }, 500);
+		execute(function() { skip(-1); }, 500);
+
+
+		execute(function() { visible(5); });
+		execute(function() { skip(1); }, 500);
+		execute(function() { skip(1); }, 500);
+
+		execute(function() { visible(10); });
+		execute(function() { skip(-1); }, 500);
+		execute(function() { skip(-1); }, 500);
+		execute(function() { skip(-1); }, 500);
+		execute(function() { skip(1); }, 500);
+		execute(function() { skip(2); }, 500);
+		execute(function() { skip(3); }, 500);
+		execute(function() { skip(4); }, 500);
+
+		execute(function() { reset(); run(); }, 10);
+	}
+
+	var goto = function(i)
+	{
+		CoverFlow.itemCurrent = i;
+		CoverFlow.updateCSS();
+	}
+
+	var skip = function(s)
+	{
+		goto(CoverFlow.itemCurrent + s);
+	}
+
+	var visible = function(c)
+	{
+		CoverFlow.itemsVisible = c;
+		CoverFlow.updateCSS();
+	}
+
+	run();
 }
-
-CoverFlow.itemCurrent = -9;
-CoverFlow.updateCSS();
-
-queueFlow.addClass('ready');
-
-CoverFlow.itemCurrent = 0;
-CoverFlow.updateCSS();
