@@ -148,7 +148,7 @@ a {
 
 .canvas .biography .content {
 	margin: 2em 4em;
-	-webkit-transition: opacity .5 ease;
+	-webkit-transition: opacity .5s ease;
 }
 
 .canvas .queueFlow {
